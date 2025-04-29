@@ -1,0 +1,156 @@
+/* Container fills the full viewport */
+.emc-container {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  font-family: "Salesforce Sans", Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: #2c3e50;
+  color: #ecf0f1;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-header {
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-bottom: 1px solid #34495e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sidebar-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+.room {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.room:hover {
+  background: #34495e;
+}
+.room.active {
+  background: #1abc9c;
+  color: #fff;
+}
+
+/* —— NEW ROOM FORM (High Contrast & Spaced) —— */
+.new-room-form {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-bottom: 2px solid #0157f7;
+}
+.new-room-form .slds-form-element {
+  margin-bottom: 1.25rem;
+}
+.new-room-form .slds-form-element__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #2d2d2d;
+}
+.new-room-form lightning-input,
+.new-room-form lightning-textarea,
+.new-room-form lightning-input[type="toggle"] {
+  --sds-c-input-background-color: #fafafa;
+  --sds-c-input-border-color: #016ef4;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+.new-room-form lightning-input[type="toggle"] .slds-checkbox_faux {
+  border-radius: 4px;
+}
+.new-room-form .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Main chat area */
+.chat-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  background: #f4f6f9;
+  min-height: 0;
+}
+.chat-card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  border: 1px solid #d8dde6;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  min-height: 0;
+}
+.chat-header {
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid #d8dde6;
+  background: #fafafa;
+  flex: 0 0 auto;
+}
+
+/* Messages pane */
+.messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 1rem;
+  padding-bottom: 5rem; /* space for footer */
+  overflow-y: auto;
+  background: #ecf0f1;
+}
+.message-item {
+  margin-bottom: 0.75rem;
+}
+.message-user {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+.message-text {
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  max-width: 80%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.no-messages {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 2rem;
+}
+
+/* Fixed input footer */
+.input-area {
+  position: sticky;
+  bottom: 0;
+  flex: 0 0 auto;
+  display: flex;
+  padding: 0.75rem;
+  border-top: 1px solid #d8dde6;
+  background: #fff;
+  z-index: 1;
+}
+.msg-input {
+  flex: 1 1 auto;
+  margin-right: 0.75rem;
+  min-height: 4rem;
+  max-height: 12rem;
+}

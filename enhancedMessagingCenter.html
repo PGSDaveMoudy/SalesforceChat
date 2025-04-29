@@ -1,0 +1,128 @@
+<template>
+  <div class="emc-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span>Chat Rooms</span>
+        <lightning-button-icon
+          icon-name="utility:new"
+          alternative-text="New Room"
+          title="New Room"
+          onclick={toggleNewRoomForm}
+        ></lightning-button-icon>
+      </div>
+
+      <!-- New Room Form -->
+      <template if:true={showNewRoomForm}>
+        <div class="new-room-form">
+          <lightning-input
+            label="Name"
+            value={newRoomName}
+            onchange={handleRoomFieldChange}
+            data-field="newRoomName"
+          ></lightning-input>
+          <lightning-textarea
+            label="Description"
+            value={newRoomDesc}
+            onchange={handleRoomFieldChange}
+            data-field="newRoomDesc"
+          ></lightning-textarea>
+          <lightning-input
+            type="toggle"
+            label="Private"
+            checked={newRoomPrivate}
+            onchange={handleRoomFieldChange}
+            data-field="newRoomPrivate"
+          ></lightning-input>
+          <div class="form-actions">
+            <lightning-button
+              label="Create"
+              variant="brand"
+              onclick={handleCreateRoom}
+              disabled={createDisabled}
+            ></lightning-button>
+            <lightning-button
+              label="Cancel"
+              onclick={toggleNewRoomForm}
+            ></lightning-button>
+          </div>
+        </div>
+      </template>
+
+      <!-- Room List -->
+      <div class="sidebar-list">
+        <template for:each={roomsWithClass} for:item="r">
+          <button
+            key={r.value}
+            class={r.className}
+            data-id={r.value}
+            onclick={handleRoomChange}
+          >
+            {r.label}
+          </button>
+        </template>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <section class="chat-main">
+      <div class="chat-card">
+        <!-- Header with bell icon and badge -->
+        <header class="chat-header">
+          <span class="room-title">{currentRoomName}</span>
+          <div class="notification">
+            <lightning-button-icon
+              icon-name="utility:notification"
+              alternative-text="New messages"
+              title="New messages"
+              onclick={handleBellClick}
+              class="bell-icon"
+            ></lightning-button-icon>
+            <template if:true={newMessageCount}>
+              <lightning-badge
+                label={newMessageCount}
+                class="bell-badge"
+                variant="inverse"
+                size="small"
+              ></lightning-badge>
+            </template>
+          </div>
+        </header>
+
+        <!-- Messages -->
+        <div class="messages">
+          <template if:true={messages.length}>
+            <template for:each={messages} for:item="m">
+              <div key={m.Id} class="message-item">
+                <span class="message-user">{m.senderName}:</span>
+                <lightning-formatted-rich-text
+                  class="message-text"
+                  value={m.Body__c}
+                ></lightning-formatted-rich-text>
+              </div>
+            </template>
+          </template>
+          <template if:false={messages.length}>
+            <div class="no-messages">No messages yet</div>
+          </template>
+        </div>
+
+        <!-- Input Footer -->
+        <footer class="input-area">
+          <lightning-input-rich-text
+            class="msg-input"
+            value={newBody}
+            placeholder="Paste text or images…"
+            onchange={handleInput}
+            onkeyup={handleKeyUp}
+          ></lightning-input-rich-text>
+          <lightning-button
+            label="Send"
+            variant="brand"
+            onclick={handleSend}
+          ></lightning-button>
+        </footer>
+      </div>
+    </section>
+  </div>
+</template>
